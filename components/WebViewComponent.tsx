@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { WebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -11,12 +12,15 @@ const styles = StyleSheet.create({
 });
 
 export default function WebViewComponent() {
+
     return (
-        <WebView
-            style={styles.container}
-            originWhitelist={['*']}
-            source={{ uri: 'http://192.168.0.101:3000' }}
-        />
+        <>
+            <WebView
+                style={styles.container}
+                originWhitelist={['*']}
+                source={{ uri: `http://192.168.0.16:3000` }}
+            />
+        </>
     );
 }
 
