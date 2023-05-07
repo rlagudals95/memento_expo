@@ -2,7 +2,7 @@ import React from 'react';
 import { WebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
-
+import { getMetroServerUrl } from '../config/web';
 
 const styles = StyleSheet.create({
     container: {
@@ -18,7 +18,7 @@ export default function WebViewComponent() {
             <WebView
                 style={styles.container}
                 originWhitelist={['*']}
-                source={{ uri: `http://192.168.0.16:3000` }}
+                source={{ uri: getMetroServerUrl() }}
             />
         </>
     );
