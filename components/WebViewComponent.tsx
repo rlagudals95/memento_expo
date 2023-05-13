@@ -19,6 +19,7 @@ export default function WebViewComponent() {
                 style={styles.container}
                 originWhitelist={['*']}
                 source={{ uri: getMetroServerUrl() }}
+                bounces={false}
             />
         </>
     );
