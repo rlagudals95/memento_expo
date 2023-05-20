@@ -1,10 +1,13 @@
 import WebView from "react-native-webview";
 
 export interface MessagePacket {
-  type: string;
+  type: MessageType;
   body: any;
 }
 
+export enum MessageType {
+  auth = "auth",
+}
 export const postMessage = (
   webview: React.RefObject<WebView>,
   message: MessagePacket

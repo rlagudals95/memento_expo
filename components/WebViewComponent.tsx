@@ -1,8 +1,9 @@
-import React, { RefObject, useRef } from 'react';
+import React, { useRef } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
+import { MessageType } from '../helper/messageHelper';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,15 +14,20 @@ const styles = StyleSheet.create({
 
 export default function WebViewComponent() {
 
-
     const webViweRef = useRef<WebView>(null);
 
 
     const onMessage = (e: WebViewMessageEvent) => {
         const event = JSON.parse(e.nativeEvent.data)
+        const type: MessageType = event.type;
+        const data = event.body;
+
         console.log('onMessage', event);
+
+        console.log()
+
     }
-    
+
     return (
         <>
             <WebView
@@ -32,6 +38,7 @@ export default function WebViewComponent() {
                 javaScriptEnabled={true}
                 ref={webViweRef}
                 onMessage={onMessage}
+                domStorageEnabled={true}
             />
         </>
     );
