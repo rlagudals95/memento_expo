@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
-import { MessageType } from '../helper/messageHelper';
+import { MessageType, postMessage } from '../helper/messageHelper';
+import { AsyncStorageService } from '../helper/AsyncStorageService';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,16 +18,24 @@ export default function WebViewComponent() {
     const webViweRef = useRef<WebView>(null);
 
 
-    const onMessage = (e: WebViewMessageEvent) => {
+    const onMessage = useCallback((e: WebViewMessageEvent) => {
         const event = JSON.parse(e.nativeEvent.data)
         const type: MessageType = event.type;
         const data = event.body;
-
         console.log('onMessage', event);
+        if (type === MessageType.auth) {
+            AsyncStorageService.setData("userInfo", data);
+        }
+    }, [])
 
-        console.log()
+    const onLoadStart = useCallback(() => {
 
-    }
+        if (!webViweRef.current) return;
+        AsyncStorageService.getData("userInfo").then((userInfo) => {
+            postMessage(webViweRef, { type: MessageType.auth, body: { userInfo } });
+        });
+    }, [])
+
 
     return (
         <>
@@ -38,6 +47,7 @@ export default function WebViewComponent() {
                 javaScriptEnabled={true}
                 ref={webViweRef}
                 onMessage={onMessage}
+                onLoadStart={onLoadStart}
                 domStorageEnabled={true}
             />
         </>

@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-class AsyncStorageService {
-  static async setData(key: string, value: any) {
+export class AsyncStorageService {
+
+  public static async setData(key: string, value: any) {
     try {
       const stringValue = JSON.stringify(value);
       await AsyncStorage.setItem(key, stringValue);
@@ -10,7 +11,7 @@ class AsyncStorageService {
     }
   }
 
-  static async getData(key: string) {
+  public static async getData(key: string) {
     try {
       const value = await AsyncStorage.getItem(key);
       if (value !== null) {
@@ -19,8 +20,8 @@ class AsyncStorageService {
       }
     } catch (e: any) {
       console.log(e.message);
+      return null;
     }
   }
 }
 
-export default new AsyncStorageService();
