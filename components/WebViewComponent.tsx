@@ -34,15 +34,12 @@ export default function WebViewComponent() {
             });
         }
 
+        if (type === MessageType.removeUserInfo) {
+            AsyncStorageService.removeData('userInfo')
+        }
+
     }, [])
 
-    const onLoadEnd = useCallback(() => {
-
-        if (!webViweRef.current) return;
-        AsyncStorageService.getData("userInfo").then((userInfo) => {
-            webViweRef.current?.postMessage(JSON.stringify({ type: MessageType.auth, body: { userInfo } }))
-        });
-    }, [webViweRef])
 
     return (
         <>
@@ -54,7 +51,6 @@ export default function WebViewComponent() {
                 javaScriptEnabled={true}
                 ref={webViweRef}
                 onMessage={onMessage}
-                //onLoadEnd={onLoadEnd}
                 domStorageEnabled={true}
             />
         </>

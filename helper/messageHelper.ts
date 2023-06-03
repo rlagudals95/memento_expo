@@ -8,7 +8,8 @@ export interface MessagePacket {
 export enum MessageType {
   auth = "auth",
   hasUserInfo = "hasUserInfo",
-  setUserInfo = "setUserInfo"
+  setUserInfo = "setUserInfo",
+  removeUserInfo = "removeUserInfo"
 }
 export const postMessage = (
   webview: React.RefObject<WebView>,

@@ -23,5 +23,13 @@ export class AsyncStorageService {
       return null;
     }
   }
+
+  public static async removeData(key: string) {
+    try {
+      await AsyncStorage.removeItem(key);
+    } catch (e: any) {
+      console.error(e.message);
+    }
+  }
 }
 
