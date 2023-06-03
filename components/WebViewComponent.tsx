@@ -22,20 +22,27 @@ export default function WebViewComponent() {
         const event = JSON.parse(e.nativeEvent.data)
         const type: MessageType = event.type;
         const data = event.body;
-        console.log('onMessage', event);
-        if (type === MessageType.auth) {
+
+        if (type === MessageType.setUserInfo) {
             AsyncStorageService.setData("userInfo", data);
         }
+
+        if (type === MessageType.hasUserInfo) {
+            AsyncStorageService.getData("userInfo").then((userInfo) => {
+                console.log("hasUserInfo", userInfo)
+                webViweRef.current?.postMessage(JSON.stringify({ type: MessageType.hasUserInfo, body: { ...userInfo } }))
+            });
+        }
+
     }, [])
 
-    const onLoadStart = useCallback(() => {
+    const onLoadEnd = useCallback(() => {
 
         if (!webViweRef.current) return;
         AsyncStorageService.getData("userInfo").then((userInfo) => {
-            postMessage(webViweRef, { type: MessageType.auth, body: { userInfo } });
+            webViweRef.current?.postMessage(JSON.stringify({ type: MessageType.auth, body: { userInfo } }))
         });
-    }, [])
-
+    }, [webViweRef])
 
     return (
         <>
@@ -47,7 +54,7 @@ export default function WebViewComponent() {
                 javaScriptEnabled={true}
                 ref={webViweRef}
                 onMessage={onMessage}
-                onLoadStart={onLoadStart}
+                //onLoadEnd={onLoadEnd}
                 domStorageEnabled={true}
             />
         </>
