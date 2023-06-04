@@ -29,7 +29,6 @@ export default function WebViewComponent() {
 
         if (type === MessageType.hasUserInfo) {
             AsyncStorageService.getData("userInfo").then((userInfo) => {
-                console.log("hasUserInfo", userInfo)
                 webViweRef.current?.postMessage(JSON.stringify({ type: MessageType.hasUserInfo, body: { ...userInfo } }))
             });
         }
