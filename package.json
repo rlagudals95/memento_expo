@@ -7,7 +7,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:app-bundle:android": "expo build:android -t app-bundle"
+    "build:android": "expo build:android",
+    "build:ios": "expo build:ios",
+    "publish": "expo publish",
+    "doctor": "expo doctor --fix-dependencies"
   },
   "dependencies": {
     "@emotion/native": "^11.11.0",
@@ -19,8 +22,9 @@
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
-    "react-native": "0.71.7",
-    "react-native-webview": "11.26.0"
+    "react-native": "0.71.8",
+    "react-native-webview": "11.26.0",
+    "expo-updates": "~0.16.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
