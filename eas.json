@@ -3,7 +3,7 @@
     "development": {
       "distribution": "internal",
       "env": {
-        "API_URL": "https: //api.development.com"
+        "API_URL": "http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/"
       }
     },
     "preview": {
@@ -11,7 +11,7 @@
     },
     "production": {
       "env": {
-        "API URL": "https://api.production.com"
+        "API URL": "http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/"
       }
     }
   }

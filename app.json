@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "15b9274a-e9e5-4d30-8ef4-5d67cb6516cc"
+      }
+    },
+    "owner": "hyeongminkim"
   }
 }
