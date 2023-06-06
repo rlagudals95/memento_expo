@@ -5,7 +5,7 @@ import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
 import { MessageType } from '../helper/messageHelper';
 import { AsyncStorageService } from '../helper/AsyncStorageService';
-import Constants from 'expo-constants';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -17,16 +17,12 @@ const styles = StyleSheet.create({
 export default function WebViewComponent() {
 
     const [uri, setUri] = useState("");
-    
-    useEffect(() => {
-        //@ts-ignore
-        const hasWebViewUrlInExpoConfig = Object.keys(Constants.expoConfig?.API_URL).length !== 0
-        if (hasWebViewUrlInExpoConfig) {
-            //@ts-ignore
-            setUri(Constants.expoConfig?.API_URL)
-        } else {
 
+    useEffect(() => {
+        if (process.env.NODE_ENV === "development") {
             setUri(getMetroServerUrl());
+        } else {
+            setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/")
         }
     }, [])
 
