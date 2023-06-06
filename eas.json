@@ -10,6 +10,7 @@
       "distribution": "internal"
     },
     "production": {
+      "node": "16.20.0",
       "env": {
         "API URL": "http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/"
       }

@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
 import { MessageType } from '../helper/messageHelper';
 import { AsyncStorageService } from '../helper/AsyncStorageService';
+import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,8 +16,21 @@ const styles = StyleSheet.create({
 
 export default function WebViewComponent() {
 
-    const webViweRef = useRef<WebView>(null);
+    const [uri, setUri] = useState("");
+    
+    useEffect(() => {
+        //@ts-ignore
+        const hasWebViewUrlInExpoConfig = Object.keys(Constants.expoConfig?.API_URL).length !== 0
+        if (hasWebViewUrlInExpoConfig) {
+            //@ts-ignore
+            setUri(Constants.expoConfig?.API_URL)
+        } else {
 
+            setUri(getMetroServerUrl());
+        }
+    }, [])
+
+    const webViweRef = useRef<WebView>(null);
 
     const onMessage = useCallback((e: WebViewMessageEvent) => {
         const event = JSON.parse(e.nativeEvent.data)
@@ -45,7 +59,7 @@ export default function WebViewComponent() {
             <WebView
                 style={styles.container}
                 originWhitelist={['*']}
-                source={{ uri: getMetroServerUrl() }}
+                source={{ uri }}
                 bounces={false}
                 javaScriptEnabled={true}
                 ref={webViweRef}
