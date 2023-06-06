@@ -10,7 +10,8 @@
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
     "publish": "expo publish",
-    "doctor": "expo doctor --fix-dependencies"
+    "doctor": "expo doctor --fix-dependencies",
+    "build:android:apk": "eas build --profile preview --platform android"
   },
   "dependencies": {
     "@emotion/native": "^11.11.0",
