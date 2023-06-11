@@ -30,6 +30,10 @@
         "projectId": "15b9274a-e9e5-4d30-8ef4-5d67cb6516cc"
       }
     },
-    "owner": "hyeongminkim"
+    "owner": "hyeongminkim",
+    "plugins": [
+      ["expo-build-properties", { "android": { "kotlinVersion": "1.6.10" } }],
+      ["./app.plugin", { "devTeamId": "<APPLE_DEV_TEAM_ID>" }]
+    ]
   }
 }
