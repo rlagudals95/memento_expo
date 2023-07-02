@@ -20,7 +20,7 @@ export default function WebViewComponent() {
 
     useEffect(() => {
         if (process.env.NODE_ENV === "development") {
-            setUri(getMetroServerUrl());
+            setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/");
         } else {
             setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/")
         }
