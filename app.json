@@ -11,15 +11,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.hyeongminkim.mementomori",
-      "buildNumber": "2.0.0" 
+      "buildNumber": "2.0.0"
     },
     "android": {
-      "package": "com.hyeongmnkim.mementomori",
+      "package": "com.hyeongminkim.mementomori",
       "versionCode": 2
     },
     "web": {
