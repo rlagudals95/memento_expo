@@ -28,7 +28,7 @@ export default function WebViewComponent() {
 
     const webViweRef = useRef<WebView>(null);
 
-    const onMessage = useCallback((e: WebViewMessageEvent) => {
+    const handleOnMessage = useCallback((e: WebViewMessageEvent) => {
         const event = JSON.parse(e.nativeEvent.data)
         const type: MessageType = event.type;
         const data = event.body;
@@ -59,7 +59,7 @@ export default function WebViewComponent() {
                 bounces={false}
                 javaScriptEnabled={true}
                 ref={webViweRef}
-                onMessage={onMessage}
+                onMessage={handleOnMessage}
                 domStorageEnabled={true}
             />
         </>
