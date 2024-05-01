@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
 import { MessageType } from "../helper/message.helper";
 import { AsyncStorageService } from "../service/asyncStorage.service";
+import { getMetroServerUrl } from "../config/web";
 
 export const useWebView = () => {
     
@@ -32,9 +33,9 @@ export const useWebView = () => {
 
     useEffect(() => {
         if (process.env.NODE_ENV === "development") {
-            setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/");
+            setUri(getMetroServerUrl());
         } else {
-            setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/")
+            setUri("http://memento-fe-cra.s3-website-us-east-1.amazonaws.com")
         }
     }, [])
 
