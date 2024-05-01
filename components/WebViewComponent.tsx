@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
 import { MessageType } from '../helper/messageHelper';
 import { AsyncStorageService } from '../helper/AsyncStorageService';
+import React from 'react';
 
 
 const styles = StyleSheet.create({
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function WebViewComponent() {
+export function WebViewComponent() {
 
     const [uri, setUri] = useState("");
 
@@ -51,18 +52,16 @@ export default function WebViewComponent() {
 
 
     return (
-        <>
-            <WebView
-                style={styles.container}
-                originWhitelist={['*']}
-                source={{ uri }}
-                bounces={false}
-                javaScriptEnabled={true}
-                ref={webViweRef}
-                onMessage={handleOnMessage}
-                domStorageEnabled={true}
-            />
-        </>
+        <WebView
+            style={styles.container}
+            originWhitelist={['*']}
+            source={{ uri }}
+            bounces={false}
+            javaScriptEnabled={true}
+            ref={webViweRef}
+            onMessage={handleOnMessage}
+            domStorageEnabled={true}
+        />
     );
 }
 

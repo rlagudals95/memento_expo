@@ -1,0 +1,36 @@
+{
+  "extends": ["plugin:prettier/recommended"],
+  "plugins": ["simple-import-sort", "import"],
+  "env": { "es6": true },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/no-duplicates": "error",
+    "import/newline-after-import": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^react$"],
+          ["^@emotion"],
+          ["'^@'"],
+          ["^[a-z]"],
+          ["^~"],
+          [
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./?$",
+            "^\\./(?=.*/)(?!/?$)",
+            "^\\.(?!/?$)",
+            "^\\./?$"
+          ],
+          ["^\\u0000"]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "import/default": "off",
+    "import/namespace": "off",
+    "import/no-unresolved": "off"
+  }
+}
