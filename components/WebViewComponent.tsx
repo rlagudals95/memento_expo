@@ -1,11 +1,10 @@
-import { useRef, useEffect, useCallback, useState } from 'react';
-import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import { WebView,  } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
-import { MessageType } from '../helper/message.helper';
-import { AsyncStorageService } from '../service/asyncStorage.service';
+
 import React from 'react';
+import { useWebView } from './useWebview';
 
 
 const styles = StyleSheet.create({
@@ -17,39 +16,7 @@ const styles = StyleSheet.create({
 
 export function WebViewComponent() {
 
-    const [uri, setUri] = useState("");
-
-    useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/");
-        } else {
-            setUri("http://mementomori.prod.s3-website.ap-northeast-2.amazonaws.com/")
-        }
-    }, [])
-
-    const webViweRef = useRef<WebView>(null);
-
-    const handleOnMessage = useCallback((e: WebViewMessageEvent) => {
-        const event = JSON.parse(e.nativeEvent.data)
-        const type: MessageType = event.type;
-        const data = event.body;
-
-        if (type === MessageType.setUserInfo) {
-            AsyncStorageService.setData("userInfo", data);
-        }
-
-        if (type === MessageType.hasUserInfo) {
-            AsyncStorageService.getData("userInfo").then((userInfo) => {
-                webViweRef.current?.postMessage(JSON.stringify({ type: MessageType.hasUserInfo, body: { ...userInfo } }))
-            });
-        }
-
-        if (type === MessageType.removeUserInfo) {
-            AsyncStorageService.removeData('userInfo')
-        }
-
-    }, [])
-
+    const { handleOnMessage, webViweRef, uri } = useWebView();
 
     return (
         <WebView
