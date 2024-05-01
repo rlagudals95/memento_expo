@@ -3,8 +3,8 @@ import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import { DEVICE_SIZE } from '../config/constants';
 import { getMetroServerUrl } from '../config/web';
-import { MessageType } from '../helper/messageHelper';
-import { AsyncStorageService } from '../helper/AsyncStorageService';
+import { MessageType } from '../helper/message.helper';
+import { AsyncStorageService } from '../service/asyncStorage.service';
 import React from 'react';
 
 
